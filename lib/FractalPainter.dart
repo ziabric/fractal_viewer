@@ -5,10 +5,6 @@ import 'package:flutter/material.dart';
 
 class FractalPainter extends CustomPainter {
 
-
-
-  FractalPainter()
-
   @override
   void paint(Canvas canvas, Size size) {
     final double sideLength = size.shortestSide * 0.8;
