@@ -76,18 +76,22 @@ class _MainWindowState extends State<MainWindow> with TickerProviderStateMixin {
       ),
       body: Stack(
         children: [
-          SingleChildScrollView(
+          Center(
+            child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
-              child: Container(
-                color: Colors.white,
-                child: CustomPaint(
-                  size: const Size(400,400),
-                  painter: FractalPainter(),
+              child: Center(
+                child: Container(
+                  color: Colors.white,
+                  child: CustomPaint(
+                    size: Size(mainLenght,mainLenght),
+                    painter: FractalPainter(),
+                  ),
                 ),
               )
             )
+          ),
           ),
           Container(
             alignment: Alignment.bottomCenter,

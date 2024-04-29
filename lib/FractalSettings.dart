@@ -23,7 +23,7 @@ class _FractalSettingsState extends State<FractalSettings> {
           TextButton.icon(
             onPressed: () {
               FractalBody newFB = FractalBody();
-              newFB.name.value = const TextEditingValue(text: "new F");
+              newFB.name.value = const TextEditingValue(text: "new A");
               ifs.insert(0, newFB);
               setState(() {});
             }, 
