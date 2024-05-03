@@ -56,13 +56,11 @@ class _EditPointsState extends State<EditPoints> {
                 TextField(
                   style: inputTextStyle,
                   controller: rootPoints[index].X,
-                  keyboardType: TextInputType.none,
                   decoration: const InputDecoration(labelText: 'X'),
                 ),
                 TextField(
                   style: inputTextStyle,
                   controller: rootPoints[index].Y,
-                  keyboardType: TextInputType.none,
                   decoration: const InputDecoration(labelText: 'Y'),
                 ),
                 const SizedBox(height: 10,),

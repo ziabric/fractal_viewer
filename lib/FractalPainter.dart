@@ -38,9 +38,9 @@ class FractalPainter extends CustomPainter {
       List<Offset> newPoints = [];
       for (var item in oldPoints) {
         newPoints.add(Offset(
-          item.dx * double.parse(fs.scale.text) * ( cos(int.parse(fs.angle.text)) - sin(int.parse(fs.angle.text)) ) + double.parse(fs.goToX.text)
+          ( item.dx * double.parse(fs.scale.text) * cos(int.parse(fs.angle.text)) - item.dy * double.parse(fs.scale.text) * sin(int.parse(fs.angle.text)) ) + double.parse(fs.goToX.text)
           ,
-          item.dy * double.parse(fs.scale.text) * ( sin(int.parse(fs.angle.text)) + cos(int.parse(fs.angle.text)) ) + double.parse(fs.goToY.text)
+          ( item.dx * double.parse(fs.scale.text) * sin(int.parse(fs.angle.text)) + item.dy * double.parse(fs.scale.text) * cos(int.parse(fs.angle.text)) ) + double.parse(fs.goToY.text)
           ));
       }
       for (int i = 1; i < newPoints.length; i += 1) {

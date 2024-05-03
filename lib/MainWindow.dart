@@ -33,7 +33,7 @@ class _MainWindowState extends State<MainWindow> with TickerProviderStateMixin {
               scrollDirection: Axis.horizontal,
               child: Center(
                 child: Container(
-                  color: Colors.white,
+                  color: const Color.fromARGB(0, 0, 0, 0),
                   child: CustomPaint(
                     size: Size(mainLenght,mainLenght),
                     painter: FractalPainter(),

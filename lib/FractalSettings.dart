@@ -61,31 +61,26 @@ class _FractalSettingsState extends State<FractalSettings> {
                 TextField(
                   style: inputTextStyle,
                   controller: ifs[index].name,
-                  keyboardType: TextInputType.none,
                   decoration: const InputDecoration(labelText: 'Name'),
                 ),
                 TextField(
                   style: inputTextStyle,
-                  keyboardType: TextInputType.none,
                   controller: ifs[index].angle,
                   decoration: const InputDecoration(labelText: 'Angle'),
                 ),
                 TextField(
                   style: inputTextStyle,
                   controller: ifs[index].scale,
-                  keyboardType: TextInputType.none,
                   decoration: const InputDecoration(labelText: 'Scale'),
                 ),
                 TextField(
                   style: inputTextStyle,
                   controller: ifs[index].goToX,
-                  keyboardType: TextInputType.none,
                   decoration: const InputDecoration(labelText: 'go to X'),
                 ),
                 TextField(
                   style: inputTextStyle,
                   controller: ifs[index].goToY,
-                  keyboardType: TextInputType.none,
                   decoration: const InputDecoration(labelText: 'go to Y'),
                 ),
                 const SizedBox(height: 10,),
