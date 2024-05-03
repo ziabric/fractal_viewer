@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_turtle/flutter_turtle.dart';
 import 'package:fractal/GlobalVariables.dart';
 
 import 'FractalSettings.dart';
@@ -18,22 +17,22 @@ class _MainWindowState extends State<MainWindow> with TickerProviderStateMixin {
     super.initState();
   }
 
-  List<TurtleCommand> generateFractal(int iterations, double length, double scale, double angle, Vector2 shift) {
+  // List<TurtleCommand> generateFractal(int iterations, double length, double scale, double angle, Vector2 shift) {
     
-    List<TurtleCommand> commands = [];
-    double newLength = length;
+  //   List<TurtleCommand> commands = [];
+  //   double newLength = length;
 
-    for (int i = 1; i <= iterations; i++) {
+  //   for (int i = 1; i <= iterations; i++) {
 
-      commands.add(Forward((_) => newLength));
-      commands.add(Left((_) => angle));
+  //     commands.add(Forward((_) => newLength));
+  //     commands.add(Left((_) => angle));
 
-      newLength *= scale;
+  //     newLength *= scale;
 
-    }
+  //   }
 
-    return commands;
-  }
+  //   return commands;
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -141,7 +140,9 @@ class _MainWindowState extends State<MainWindow> with TickerProviderStateMixin {
                       IconButton(
                         iconSize: 30,
                         onPressed: (){
-                          setState(() {});
+                          setState(() {
+
+                          });
                         }, 
                         icon: const Icon(Icons.refresh)
                       ),

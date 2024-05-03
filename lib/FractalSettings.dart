@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'GlobalVariables.dart';
+import 'EditPoints.dart';
 
 class FractalSettings extends StatefulWidget {
   const FractalSettings({super.key});
@@ -29,6 +30,13 @@ class _FractalSettingsState extends State<FractalSettings> {
             }, 
             icon: const Icon(Icons.add), 
             label: const Text("Add new func")
+          ),
+          TextButton.icon(
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const EditPoints()));
+            }, 
+            icon: const Icon(Icons.gesture), 
+            label: const Text("Set points")
           ),
         ],
       ),

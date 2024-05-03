@@ -1,38 +1,53 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'GlobalVariables.dart';
 
 class FractalPainter extends CustomPainter {
 
-  List<Offset> rootPoints = [
-    Offset(0, 0),
-    Offset(0, 20)
-  ];
-
   @override
   void paint(Canvas canvas, Size size) {
-    final double sideLength = size.shortestSide * 0.6;
-    final double offsetX = (size.width - sideLength) / 2;
-    final double offsetY = (size.height - sideLength) / 2;
-
     final Paint paint = Paint()
       ..color = Colors.black
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.0;
 
-    drawFractal(canvas, paint, offsetX, offsetY, sideLength);
+    List<Offset> points = [];
+
+    for (var item in rootPoints) {
+      double? offsetX = double.parse(item.X.text);
+      double? offsetY = double.parse(item.Y.text);
+      if (offsetX.isFinite && offsetY.isFinite) {
+        points.add(Offset(offsetX, offsetY));
+      } else {
+        print("ERROR => ${item.X.text} - ${item.Y.text}");
+      }
+    }
+
+    for (int i = 1; i < points.length; i += 1) {
+      canvas.drawLine(Offset(points[i-1].dx+(mainLenght/2),points[i-1].dy+(mainLenght/2)), Offset(points[i].dx+(mainLenght/2),points[i].dy+(mainLenght/2)), paint);
+    }
+
+    drawMyFractal(iterationCount-1, canvas, paint, points);
   }
 
-  void drawMyFractal( int remains, Canvas canvas, Paint paint, List<Offset> points, FractalBody fractalBody) {
-    if ( remains < 1 ) {
+  void drawMyFractal( int remains, Canvas canvas, Paint paint, List<Offset> oldPoints) {
+    if ( remains < 1 && oldPoints.isNotEmpty ) {
       return;
     }
 
     for (var fs in ifs) {
-
-      for (var point in points) {
-
-        
+      List<Offset> newPoints = [];
+      for (var item in oldPoints) {
+        newPoints.add(Offset(
+          item.dx * double.parse(fs.scale.text) * ( cos(int.parse(fs.angle.text)) - sin(int.parse(fs.angle.text)) ) + double.parse(fs.goToX.text)
+          ,
+          item.dy * double.parse(fs.scale.text) * ( sin(int.parse(fs.angle.text)) + cos(int.parse(fs.angle.text)) ) + double.parse(fs.goToY.text)
+          ));
       }
+      for (int i = 1; i < newPoints.length; i += 1) {
+        canvas.drawLine(Offset(newPoints[i-1].dx+(mainLenght/2),newPoints[i-1].dy+(mainLenght/2)), Offset(newPoints[i].dx+(mainLenght/2),newPoints[i].dy+(mainLenght/2)), paint);
+      }
+      drawMyFractal(remains-1, canvas, paint, newPoints);
     }
   }
 
@@ -65,6 +80,6 @@ class FractalPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return false;
+    return true;
   }
 }

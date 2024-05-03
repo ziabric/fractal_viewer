@@ -11,15 +11,23 @@ class FractalBody {
   final goToY = TextEditingController();
 }
 
-class Vector2 {
-  Vector2(this.x, this.y);
-  double x = 0;
-  double y = 0;
+class MyPoint {
+  MyPoint();
+  final X = TextEditingController();
+  final Y = TextEditingController();
 }
+
+// class Vector2 {
+//   Vector2(this.x, this.y);
+//   double x = 0;
+//   double y = 0;
+// }
 
 List<FractalBody> ifs = [];
 
 List<String> temp = [];
+
+List<MyPoint> rootPoints = [];
 
 double mainLenght = 300;
 int iterationCount = 2;
@@ -30,5 +38,5 @@ const inputTextStyle = TextStyle(
 
 final mainBoxDecoration = BoxDecoration(
   border: Border.all(),
-  borderRadius: BorderRadius.all(Radius.circular(15)),
+  borderRadius: const BorderRadius.all(Radius.circular(15)),
 ); 
