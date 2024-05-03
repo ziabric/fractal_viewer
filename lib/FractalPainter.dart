@@ -19,7 +19,6 @@ class FractalPainter extends CustomPainter {
       if (offsetX.isFinite && offsetY.isFinite) {
         points.add(Offset(offsetX, offsetY));
       } else {
-        print("ERROR => ${item.X.text} - ${item.Y.text}");
       }
     }
 
@@ -50,34 +49,6 @@ class FractalPainter extends CustomPainter {
       drawMyFractal(remains-1, canvas, paint, newPoints);
     }
   }
-
-  void drawFractal(Canvas canvas, Paint paint, double x, double y, double sideLength) {
-    if (sideLength < 1) {
-      return;
-    }
-
-
-
-    // canvas.drawRect(
-    //   Rect.fromLTWH(x, y, sideLength, sideLength),
-    //   paint,
-    // );
-
-    final double nextSize = sideLength / 3;
-
-
-
-    // Recursively draw eight smaller squares
-    // drawFractal(canvas, paint, x, y, nextSize); // Top left
-    // drawFractal(canvas, paint, x + nextSize, y, nextSize); // Top middle
-    // drawFractal(canvas, paint, x + 2 * nextSize, y, nextSize); // Top right
-    // drawFractal(canvas, paint, x, y + nextSize, nextSize); // Middle left
-    // drawFractal(canvas, paint, x + 2 * nextSize, y + nextSize, nextSize); // Middle right
-    // drawFractal(canvas, paint, x, y + 2 * nextSize, nextSize); // Bottom left
-    // drawFractal(canvas, paint, x + nextSize, y + 2 * nextSize, nextSize); // Bottom middle
-    // drawFractal(canvas, paint, x + 2 * nextSize, y + 2 * nextSize, nextSize); // Bottom right
-  }
-
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
     return true;

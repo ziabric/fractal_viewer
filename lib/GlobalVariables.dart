@@ -17,12 +17,6 @@ class MyPoint {
   final Y = TextEditingController();
 }
 
-// class Vector2 {
-//   Vector2(this.x, this.y);
-//   double x = 0;
-//   double y = 0;
-// }
-
 List<FractalBody> ifs = [];
 
 List<String> temp = [];

@@ -17,57 +17,8 @@ class _MainWindowState extends State<MainWindow> with TickerProviderStateMixin {
     super.initState();
   }
 
-  // List<TurtleCommand> generateFractal(int iterations, double length, double scale, double angle, Vector2 shift) {
-    
-  //   List<TurtleCommand> commands = [];
-  //   double newLength = length;
-
-  //   for (int i = 1; i <= iterations; i++) {
-
-  //     commands.add(Forward((_) => newLength));
-  //     commands.add(Left((_) => angle));
-
-  //     newLength *= scale;
-
-  //   }
-
-  //   return commands;
-  // }
-
   @override
   Widget build(BuildContext context) {
-
-    // List<TurtleView> fractals = [];
-
-    // for (var fractal in ifs) {
-
-    //   final newFractal = TurtleView(
-    //     commands: [
-    //       PenDown(),
-    //       SetColor((_) => Colors.blueGrey),
-    //       SetStrokeWidth((_) => 2),
-          
-    //       Repeat((p0) => 10, (ifs.isEmpty) ? [] : generateFractal(
-    //         iterationCount,
-    //         mainLenght,
-    //         double.parse(fractal.scale.text),
-    //         double.parse(fractal.angle.text),
-    //         Vector2(0, 0)
-    //       )),
-
-    //       PenUp(),
-    //     ],
-    //     child: const SizedBox(
-    //       width: 1800,
-    //       height: 1800,
-    //       child: Text(""),
-    //     ),
-    //   );
-
-    //   fractals.add(newFractal);
-    // }
-
-    print("MainWindow");
 
     return Scaffold(
       appBar: AppBar(
