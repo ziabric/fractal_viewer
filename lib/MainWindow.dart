@@ -16,9 +16,11 @@ class _MainWindowState extends State<MainWindow> with TickerProviderStateMixin {
   void initState() {
     super.initState();
   }
-
+    
   @override
   Widget build(BuildContext context) {
+
+    // screenWidth = MediaQuery.of(context).size.width * 3;
 
     return Scaffold(
       appBar: AppBar(
@@ -28,20 +30,21 @@ class _MainWindowState extends State<MainWindow> with TickerProviderStateMixin {
         children: [
           Center(
             child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Center(
-                child: Container(
-                  color: const Color.fromARGB(0, 0, 0, 0),
-                  child: CustomPaint(
-                    size: Size(mainLenght,mainLenght),
-                    painter: FractalPainter(),
+              scrollDirection: Axis.vertical,
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Center(
+                  child: Container(
+                    color: const Color.fromARGB(150, 255, 0, 0),
+                    child: CustomPaint(
+                      size: Size(screenWidth,screenWidth),
+                      // size: Size(MediaQuery.of(context).size.width * 3 * mainLenght, MediaQuery.of(context).size.width * 3 * mainLenght),
+                      painter: FractalPainter(),
+                    ),
                   ),
-                ),
+                )
               )
-            )
-          ),
+            ),
           ),
           Container(
             alignment: Alignment.bottomCenter,
@@ -56,18 +59,18 @@ class _MainWindowState extends State<MainWindow> with TickerProviderStateMixin {
                       IconButton(
                         iconSize: 30,
                         onPressed: (){
-                          mainLenght += 30;
+                          mainLenght += 0.3;
                           setState(() {});
                         }, 
                         icon: const Icon(Icons.add)
                       ),
-                      Text(mainLenght.toString()),
+                      Text(mainLenght.toStringAsFixed(1)),
                       IconButton(
                         iconSize: 30,
                         onPressed: (){
-                          mainLenght -= 30;
+                          mainLenght -= 0.3;
                           if (mainLenght <= 0) {
-                            mainLenght += 30;
+                            mainLenght += 0.3;
                           }
                           setState(() {});
                         }, 
@@ -91,9 +94,7 @@ class _MainWindowState extends State<MainWindow> with TickerProviderStateMixin {
                       IconButton(
                         iconSize: 30,
                         onPressed: (){
-                          setState(() {
-
-                          });
+                          setState(() {});
                         }, 
                         icon: const Icon(Icons.refresh)
                       ),

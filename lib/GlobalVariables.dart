@@ -3,18 +3,18 @@ import 'package:flutter/material.dart';
 
 class FractalBody {
   FractalBody();
-  final name = TextEditingController();
+  var name = TextEditingController();
   Color color = Colors.black;
-  final angle = TextEditingController();
-  final scale = TextEditingController(); 
-  final goToX = TextEditingController();
-  final goToY = TextEditingController();
+  var angle = TextEditingController();
+  var scale = TextEditingController(); 
+  var goToX = TextEditingController();
+  var goToY = TextEditingController();
 }
 
 class MyPoint {
   MyPoint();
-  final X = TextEditingController();
-  final Y = TextEditingController();
+  var X = TextEditingController();
+  var Y = TextEditingController();
 }
 
 List<FractalBody> ifs = [];
@@ -23,7 +23,8 @@ List<String> temp = [];
 
 List<MyPoint> rootPoints = [];
 
-double mainLenght = 300;
+double mainLenght = 1;
+double screenWidth = 100;
 int iterationCount = 2;
 
 const inputTextStyle = TextStyle(
