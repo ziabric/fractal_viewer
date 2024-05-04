@@ -12,6 +12,8 @@ class MainWindow extends StatefulWidget {
 
 class _MainWindowState extends State<MainWindow> with TickerProviderStateMixin {
 
+  Offset position = Offset(0, 0);
+
   @override
   void initState() {
     super.initState();
@@ -20,7 +22,14 @@ class _MainWindowState extends State<MainWindow> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
 
-    // screenWidth = MediaQuery.of(context).size.width * 3;
+    screenWidth = 10;
+
+    for (var point in rootPoints) {
+      if (double.parse(point.X.text) > screenWidth) screenWidth = double.parse(point.X.text);
+      if (double.parse(point.Y.text) > screenWidth) screenWidth = double.parse(point.Y.text);
+    }
+
+    screenWidth = screenWidth * mainLenght * 3;
 
     return Scaffold(
       appBar: AppBar(
@@ -28,24 +37,35 @@ class _MainWindowState extends State<MainWindow> with TickerProviderStateMixin {
       ),
       body: Stack(
         children: [
-          Center(
-            child: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Center(
-                  child: Container(
-                    color: const Color.fromARGB(150, 255, 0, 0),
-                    child: CustomPaint(
-                      size: Size(screenWidth,screenWidth),
-                      // size: Size(MediaQuery.of(context).size.width * 3 * mainLenght, MediaQuery.of(context).size.width * 3 * mainLenght),
-                      painter: FractalPainter(),
-                    ),
-                  ),
-                )
-              )
-            ),
+          Positioned(
+            left: position.dx,
+            top: position.dy,
+            width: screenWidth,
+            height: screenWidth,
+            child: GestureDetector(
+              child: Container(
+                width: 200,
+                height: 200,
+                decoration: const BoxDecoration(
+                  color: Color.fromARGB(50, 0, 0, 255),
+                  borderRadius: BorderRadius.all(Radius.circular(15))
+                ),
+                child: CustomPaint(
+                  size: Size(screenWidth * mainLenght,screenWidth * mainLenght),
+                  painter: FractalPainter(),
+                ),
+              ),
+              onPanUpdate: (details) {
+                setState(() {
+                  position = Offset(
+                    position.dx + details.delta.dx,
+                    position.dy + details.delta.dy,
+                  );
+                });
+              },
+            )
           ),
+          // DragDropWidget(),
           Container(
             alignment: Alignment.bottomCenter,
             margin: const EdgeInsets.all(20),
@@ -87,14 +107,16 @@ class _MainWindowState extends State<MainWindow> with TickerProviderStateMixin {
                       IconButton(
                         iconSize: 30,
                         onPressed: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => const FractalSettings()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => FractalSettings()));
                         }, 
                         icon: const Icon(Icons.menu)
                       ),
                       IconButton(
                         iconSize: 30,
                         onPressed: (){
-                          setState(() {});
+                          setState(() {
+                            position = Offset.zero;
+                          });
                         }, 
                         icon: const Icon(Icons.refresh)
                       ),
@@ -137,3 +159,53 @@ class _MainWindowState extends State<MainWindow> with TickerProviderStateMixin {
     ); 
   }
 }
+
+// class DragDropWidget extends StatefulWidget {
+//   @override
+//   _DragDropWidgetState createState() => _DragDropWidgetState();
+// }
+
+// class _DragDropWidgetState extends State<DragDropWidget> {
+//   Offset position = Offset(0, 0);
+//   @override
+//   Widget build(BuildContext context) {
+//     return Stack(
+//       children: [
+//         Container(
+//           width: MediaQuery.of(context).size.width,
+//           height: MediaQuery.of(context).size.height - 117,
+//           color: Colors.blueAccent,
+//           child: Positioned(
+//             left: position.dx,
+//             top: position.dy,
+//             height: screenWidth * mainLenght,
+//             width: screenWidth * mainLenght,
+//             child: Container(
+//               color: Colors.red,
+//               height: screenWidth * mainLenght,
+//               width: screenWidth * mainLenght,
+//               child: GestureDetector(
+//                 onPanUpdate: (details) {
+//                   setState(() {
+//                     position = Offset(
+//                       position.dx + details.delta.dx,
+//                       position.dy + details.delta.dy,
+//                     );
+//                   });
+//                 },
+//                 child: Container(
+//                   height: screenWidth * mainLenght,
+//                   width: screenWidth * mainLenght,
+//                   color: Colors.amber,
+//                   child: CustomPaint(
+//                     size: Size(screenWidth * mainLenght,screenWidth * mainLenght),
+//                     painter: FractalPainter(),
+//                 )
+//               ),
+//             )
+//           ),
+//         ))
+//       ],
+//     );
+//   }
+// }
