@@ -28,8 +28,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  flutter_turtle: ^0.4.2
-  flutter_fractal: ^2.0.0
+  flutter_colorpicker: ^1.0.3
   flutter:
     sdk: flutter
 

@@ -77,7 +77,7 @@ class _MainWindowState extends State<MainWindow> with TickerProviderStateMixin {
                   child: Row(
                     children: [
                       IconButton(
-                        iconSize: 30,
+                        iconSize: mainIconSize,
                         onPressed: (){
                           mainLenght += 0.3;
                           setState(() {});
@@ -86,7 +86,7 @@ class _MainWindowState extends State<MainWindow> with TickerProviderStateMixin {
                       ),
                       Text(mainLenght.toStringAsFixed(1)),
                       IconButton(
-                        iconSize: 30,
+                        iconSize: mainIconSize,
                         onPressed: (){
                           mainLenght -= 0.3;
                           if (mainLenght <= 0) {
@@ -105,14 +105,14 @@ class _MainWindowState extends State<MainWindow> with TickerProviderStateMixin {
                   child: Row(
                     children: [
                       IconButton(
-                        iconSize: 30,
+                        iconSize: mainIconSize,
                         onPressed: (){
                           Navigator.push(context, MaterialPageRoute(builder: (context) => FractalSettings()));
                         }, 
                         icon: const Icon(Icons.menu)
                       ),
                       IconButton(
-                        iconSize: 30,
+                        iconSize: mainIconSize,
                         onPressed: (){
                           setState(() {
                             position = Offset.zero;
@@ -129,7 +129,7 @@ class _MainWindowState extends State<MainWindow> with TickerProviderStateMixin {
                   child: Row(
                     children: [
                       IconButton(
-                        iconSize: 30,
+                        iconSize: mainIconSize,
                         onPressed: (){
                           iterationCount += 1;
                           setState(() {});
@@ -138,7 +138,7 @@ class _MainWindowState extends State<MainWindow> with TickerProviderStateMixin {
                       ),
                       Text(iterationCount.toString()),
                       IconButton(
-                        iconSize: 30,
+                        iconSize: mainIconSize,
                         onPressed: (){
                           iterationCount -= 1;
                           if (iterationCount <= 0) {

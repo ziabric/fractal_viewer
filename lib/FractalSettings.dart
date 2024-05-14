@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'GlobalVariables.dart';
 import 'EditPoints.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 class FractalSettings extends StatefulWidget {
   const FractalSettings({super.key});
@@ -83,7 +84,28 @@ class _FractalSettingsState extends State<FractalSettings> {
                   controller: ifs[index].goToY,
                   decoration: const InputDecoration(labelText: 'go to Y'),
                 ),
+                // MaterialPicker(
+                //   pickerColor: ifs[index].color,
+                //   onColorChanged: (newColor) {ifs[index].color = newColor;} ,
+                //   enableLabel: false,
+                //   portraitOnly: true,
+                // ),
+                // BlockPicker(
+                //   pickerColor: ifs[index].color, 
+                //   onColorChanged: (newColor) {ifs[index].color = newColor;},
+                //   useInShowDialog: true,
+                // ),
                 const SizedBox(height: 10,),
+                ColorPicker(
+                  pickerColor: ifs[index].color,
+                  onColorChanged: (newColor) {ifs[index].color = newColor;},
+                  showLabel: false,
+                  enableAlpha: false,
+                  paletteType: PaletteType.hsv,
+                  colorPickerWidth: 300,
+                  pickerAreaHeightPercent: 0.3,
+                ),
+                // const SizedBox(height: 10,),
                 TextButton.icon(
                   onPressed: () {
                     ifs.remove(ifs[index]);

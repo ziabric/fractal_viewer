@@ -9,7 +9,7 @@ class FractalPainter extends CustomPainter {
     final Paint paint = Paint()
       ..color = Colors.black
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 1.0;
+      ..strokeWidth = 2.0;
 
     List<Offset> points = [];
 
@@ -26,10 +26,10 @@ class FractalPainter extends CustomPainter {
       canvas.drawLine(Offset(points[i-1].dx+(screenWidth/2),-points[i-1].dy+(screenWidth/2)), Offset(points[i].dx+(screenWidth/2),-points[i].dy+(screenWidth/2)), paint);
     }
 
-    drawMyFractal(iterationCount-1, canvas, paint, points);
+    drawMyFractal(iterationCount-1, canvas, points);
   }
 
-  void drawMyFractal( int remains, Canvas canvas, Paint paint, List<Offset> oldPoints) {
+  void drawMyFractal( int remains, Canvas canvas, List<Offset> oldPoints) {
     if ( remains < 1 && oldPoints.isNotEmpty ) {
       return;
     }
@@ -38,15 +38,18 @@ class FractalPainter extends CustomPainter {
       List<Offset> newPoints = [];
       for (var item in oldPoints) {
         newPoints.add(Offset(
-          ( item.dx * double.parse(fs.scale.text) * cos(int.parse(fs.angle.text)) - item.dy * double.parse(fs.scale.text) * sin(int.parse(fs.angle.text)) ) + double.parse(fs.goToX.text) * mainLenght
+          ( item.dx * double.parse(fs.scale.text) * cos(int.parse(fs.angle.text) * pi / 180) - item.dy * double.parse(fs.scale.text) * sin(int.parse(fs.angle.text) * pi / 180) ) + double.parse(fs.goToX.text) * mainLenght
           ,
-          ( item.dx * double.parse(fs.scale.text) * sin(int.parse(fs.angle.text)) + item.dy * double.parse(fs.scale.text) * cos(int.parse(fs.angle.text)) ) + double.parse(fs.goToY.text) * mainLenght
+          ( item.dx * double.parse(fs.scale.text) * sin(int.parse(fs.angle.text) * pi / 180) + item.dy * double.parse(fs.scale.text) * cos(int.parse(fs.angle.text) * pi / 180) ) + double.parse(fs.goToY.text) * mainLenght
           ));
       }
       for (int i = 1; i < newPoints.length; i += 1) {
-        canvas.drawLine(Offset(newPoints[i-1].dx+(screenWidth/2),-newPoints[i-1].dy+(screenWidth/2)), Offset(newPoints[i].dx+(screenWidth/2),-newPoints[i].dy+(screenWidth/2)), paint);
+        Paint newp = Paint()
+        ..color = fs.color
+        ..strokeWidth = 2;
+        canvas.drawLine(Offset(newPoints[i-1].dx+(screenWidth/2),-newPoints[i-1].dy+(screenWidth/2)), Offset(newPoints[i].dx+(screenWidth/2),-newPoints[i].dy+(screenWidth/2)), newp);
       }
-      drawMyFractal(remains-1, canvas, paint, newPoints);
+      drawMyFractal(remains-1, canvas, newPoints);
     }
   }
   @override

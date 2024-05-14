@@ -35,3 +35,5 @@ final mainBoxDecoration = BoxDecoration(
   border: Border.all(),
   borderRadius: const BorderRadius.all(Radius.circular(15)),
 ); 
+
+const double mainIconSize = 30;
