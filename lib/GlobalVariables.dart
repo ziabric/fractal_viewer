@@ -9,6 +9,8 @@ class FractalBody {
   var scale = TextEditingController(); 
   var goToX = TextEditingController();
   var goToY = TextEditingController();
+  bool flipX = false;
+  bool flipY = false;
 }
 
 class MyPoint {

@@ -18,15 +18,38 @@ class _MainWindowState extends State<MainWindow> with TickerProviderStateMixin {
   void initState() {
     super.initState();
   }
-    
+  
+  bool canParseToDouble(List<String> input) {
+    bool output = true;
+    for (var item in input) {
+      output = output && (double.tryParse(item) != null);
+    }
+    return output;
+  }
+
   @override
   Widget build(BuildContext context) {
 
     screenWidth = 10;
 
+    bool havePoints = false;
+
     for (var point in rootPoints) {
+      if ( double.tryParse(point.X.text) == null || double.tryParse(point.Y.text) == null) {
+        havePoints = false;
+        break;
+      } else {
+        havePoints = true;
+      }
       if (double.parse(point.X.text) > screenWidth) screenWidth = double.parse(point.X.text);
       if (double.parse(point.Y.text) > screenWidth) screenWidth = double.parse(point.Y.text);
+    }
+
+    for (var fs in ifs) {
+      if (!canParseToDouble([fs.angle.text, fs.scale.text, fs.goToX.text, fs.goToY.text])) {
+        havePoints = false;
+        break;
+      }
     }
 
     screenWidth = screenWidth * mainLenght * 3;
@@ -34,10 +57,19 @@ class _MainWindowState extends State<MainWindow> with TickerProviderStateMixin {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Cool fractals"),
+        actions: [
+          IconButton(
+            onPressed: () {
+
+            }, 
+            icon: const Icon(Icons.help),
+            iconSize: mainIconSize,
+        )
+        ],
       ),
       body: Stack(
         children: [
-          Positioned(
+          (!havePoints) ? const Text("") : Positioned(
             left: position.dx,
             top: position.dy,
             width: screenWidth,
@@ -159,53 +191,3 @@ class _MainWindowState extends State<MainWindow> with TickerProviderStateMixin {
     ); 
   }
 }
-
-// class DragDropWidget extends StatefulWidget {
-//   @override
-//   _DragDropWidgetState createState() => _DragDropWidgetState();
-// }
-
-// class _DragDropWidgetState extends State<DragDropWidget> {
-//   Offset position = Offset(0, 0);
-//   @override
-//   Widget build(BuildContext context) {
-//     return Stack(
-//       children: [
-//         Container(
-//           width: MediaQuery.of(context).size.width,
-//           height: MediaQuery.of(context).size.height - 117,
-//           color: Colors.blueAccent,
-//           child: Positioned(
-//             left: position.dx,
-//             top: position.dy,
-//             height: screenWidth * mainLenght,
-//             width: screenWidth * mainLenght,
-//             child: Container(
-//               color: Colors.red,
-//               height: screenWidth * mainLenght,
-//               width: screenWidth * mainLenght,
-//               child: GestureDetector(
-//                 onPanUpdate: (details) {
-//                   setState(() {
-//                     position = Offset(
-//                       position.dx + details.delta.dx,
-//                       position.dy + details.delta.dy,
-//                     );
-//                   });
-//                 },
-//                 child: Container(
-//                   height: screenWidth * mainLenght,
-//                   width: screenWidth * mainLenght,
-//                   color: Colors.amber,
-//                   child: CustomPaint(
-//                     size: Size(screenWidth * mainLenght,screenWidth * mainLenght),
-//                     painter: FractalPainter(),
-//                 )
-//               ),
-//             )
-//           ),
-//         ))
-//       ],
-//     );
-//   }
-// }

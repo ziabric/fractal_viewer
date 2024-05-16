@@ -16,9 +16,16 @@ class FractalPainter extends CustomPainter {
     for (var item in rootPoints) {
       double? offsetX = double.parse(item.X.text) * mainLenght;
       double? offsetY = double.parse(item.Y.text) * mainLenght;
-      if (offsetX.isFinite && offsetY.isFinite) {
+      if (!offsetX.isNaN && !offsetY.isNaN) {
         points.add(Offset(offsetX, offsetY));
       } else {
+        break;
+      }
+    }
+    
+    for (var fs in ifs) {
+      if (!canParseToDouble([fs.angle.text, fs.scale.text, fs.goToX.text, fs.goToY.text])) {
+        break;
       }
     }
 
@@ -27,6 +34,14 @@ class FractalPainter extends CustomPainter {
     }
 
     drawMyFractal(iterationCount-1, canvas, points);
+  }
+
+  bool canParseToDouble(List<String> input) {
+    bool output = true;
+    for (var item in input) {
+      output = output && (double.tryParse(item) != null);
+    }
+    return output;
   }
 
   void drawMyFractal( int remains, Canvas canvas, List<Offset> oldPoints) {
@@ -38,9 +53,9 @@ class FractalPainter extends CustomPainter {
       List<Offset> newPoints = [];
       for (var item in oldPoints) {
         newPoints.add(Offset(
-          ( item.dx * double.parse(fs.scale.text) * cos(int.parse(fs.angle.text) * pi / 180) - item.dy * double.parse(fs.scale.text) * sin(int.parse(fs.angle.text) * pi / 180) ) + double.parse(fs.goToX.text) * mainLenght
+          ( item.dx * double.parse(fs.scale.text) * cos(int.parse(fs.angle.text) * pi / 180) * ( (fs.flipX) ? -1 : 1 ) - item.dy * double.parse(fs.scale.text) * sin(int.parse(fs.angle.text) * pi / 180) ) * ( (fs.flipX || fs.flipY) ? 0 : 1 ) + double.parse(fs.goToX.text) * mainLenght
           ,
-          ( item.dx * double.parse(fs.scale.text) * sin(int.parse(fs.angle.text) * pi / 180) + item.dy * double.parse(fs.scale.text) * cos(int.parse(fs.angle.text) * pi / 180) ) + double.parse(fs.goToY.text) * mainLenght
+          ( item.dx * double.parse(fs.scale.text) * sin(int.parse(fs.angle.text) * pi / 180) * ( (fs.flipX || fs.flipY) ? 0 : 1 ) + item.dy * double.parse(fs.scale.text) * cos(int.parse(fs.angle.text) * pi / 180) ) * ( (fs.flipY) ? -1 : 1 ) + double.parse(fs.goToY.text) * mainLenght
           ));
       }
       for (int i = 1; i < newPoints.length; i += 1) {

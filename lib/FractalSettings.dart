@@ -22,7 +22,7 @@ class _FractalSettingsState extends State<FractalSettings> {
       appBar: AppBar(
         title: const Text("Settings"),
         actions: [
-          TextButton.icon(
+          IconButton(
             onPressed: () {
               FractalBody newFB = FractalBody();
               newFB.name.value = const TextEditingValue(text: "new A");
@@ -30,15 +30,19 @@ class _FractalSettingsState extends State<FractalSettings> {
               setState(() {});
             }, 
             icon: const Icon(Icons.add), 
-            label: const Text("Add new func")
+            iconSize: mainIconSize,
+            // label: const Text("Add new func")
           ),
-          TextButton.icon(
+          const SizedBox(width: 10,),
+          IconButton(
             onPressed: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) => const EditPoints()));
             }, 
             icon: const Icon(Icons.gesture), 
-            label: const Text("Set points")
+            iconSize: mainIconSize,
+            // label: const Text("Set points")
           ),
+          const SizedBox(width: 10,),
         ],
       ),
       body: ListView.separated(
@@ -84,26 +88,30 @@ class _FractalSettingsState extends State<FractalSettings> {
                   controller: ifs[index].goToY,
                   decoration: const InputDecoration(labelText: 'go to Y'),
                 ),
-                // MaterialPicker(
-                //   pickerColor: ifs[index].color,
-                //   onColorChanged: (newColor) {ifs[index].color = newColor;} ,
-                //   enableLabel: false,
-                //   portraitOnly: true,
-                // ),
-                // BlockPicker(
-                //   pickerColor: ifs[index].color, 
-                //   onColorChanged: (newColor) {ifs[index].color = newColor;},
-                //   useInShowDialog: true,
-                // ),
+                const SizedBox(height: 10,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text("X flip:"),
+                    Checkbox(value: ifs[index].flipX, onChanged: (value) {setState(() {
+                      ifs[index].flipX = value!;
+                    });}),
+                    const SizedBox(width: 50,),
+                    const Text("Y flip:"),
+                    Checkbox(value: ifs[index].flipY, onChanged: (value) {setState(() {
+                      ifs[index].flipY = value!;
+                    });}),
+                  ],
+                ),
                 const SizedBox(height: 10,),
                 ColorPicker(
                   pickerColor: ifs[index].color,
                   onColorChanged: (newColor) {ifs[index].color = newColor;},
-                  showLabel: false,
                   enableAlpha: false,
                   paletteType: PaletteType.hsv,
                   colorPickerWidth: 300,
                   pickerAreaHeightPercent: 0.3,
+                  showLabel: false,
                 ),
                 // const SizedBox(height: 10,),
                 TextButton.icon(
